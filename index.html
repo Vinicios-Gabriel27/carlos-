@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede de Metrô – Projeto 05</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Simulação Interativa – Rede de Metrô (Projeto 05)</h1>
+  <p>Matemática para Computação • Cenário 2 • UNIFOR</p>
+</header>
+
+<main>
+  <section id="simulacao">
+    <canvas id="metroCanvas" width="850" height="550"></canvas>
+
+  T <div class="controles">
+      <button id="iniciar">▶ Iniciar Trem</button>
+      <button id="pausar">⏸ Pausar</button>
+      <button id="reiniciar">🔁 Reiniciar</button>
+    </div>
+
+        <div class="painel-direcoes">
+      <h2>🗺️ Visualizador de Rotas</h2>
+      <table id="controle-direcoes">
+                <thead><tr><th>Conexões Ativas</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside id="info">
+    <h2>📘 Análise Matemática Detalhada (Projeto 05)</h2>
+
+    <h3>1. Matriz de Adjacência ($M_{metrô}$)</h3>
+    <p>Representação direta das conexões. Ordem: Avenida (A), Centro (C), Praça (Pç), Parque (Pq), Shopping (S), Terminal (T).</p>
+    <pre class="matrix">
+         A  C Pç Pq S  T
+       ------------------
+    A |  1  0  1  0  0  0 |
+    C |  1  1  1  0  0  0 |
+    Pç|  0  0  1  1  0  0 |
+    Pq|  0  0  1  1  1  0 |
+    S |  1  1  0  0  1  0 |
+    T |  0  0  0  0  0  1 |
+    </pre>
+
+    <h3>2. Classificação da Relação</h3>
+    <ul>
+        <li><strong>Reflexividade: SIM ✅</strong> (Diagonal principal é toda '1'.)</li>
+        <li><strong>Simetria: NÃO ❌</strong> (Exemplo: C → A é 1, mas A → C é 0.)</li>
+        <li><strong>Assimetria: NÃO ❌</strong> (A diagonal contém '1's.)</li>
+section       <li><strong>Antissimetria: NÃO ❌</strong> (Há caminhos de "mão dupla" entre Pç ↔ Pq.)</li>
+        <li><strong>Transitividade: NÃO ❌</strong> (Exemplo: S → C e C → Pç são 1, mas S → Pç é 0. Faltam atalhos.)</li>
+    </ul>
+
+    <h3>3. Fechos das Relações (Otimizações)</h3>
+    <p>Cálculo da rede mínima necessária para possuir a propriedade desejada.</p>
+
+    <h4>a) Fecho Simétrico ($S_{metrô}$)</h4>
+    <p>A rede ideal se todas as rotas fossem bidirecionais.</p>
+    <pre class="matrix">
+         A  C Pç Pq S  T
+       ------------------
+    A |  1  1  1  0  1  0 |
+    C |  1  1  1  0  1  0 |
+    Pç|  1  1  1  1  0  0 |
+    Pq|  0  0  1  1  1  0 |
+    S |  1  1  0  1  1  0 |
+    T |  0  0  0  0  0  1 |
+    </pre>
+
+    <h4>b) Fecho Transitivo ($T_{metrô}$)</h4>
+    <p>A rede com todos os atalhos diretos possíveis (mostra o que é alcançável).</p>
+NT     <pre class="matrix">
+         A  C Pç Pq S  T
+       ------------------
+    A |  1  1  1  1  1  0 |
+    C |  1  1  1  1  1  0 |
+    Pç|  0  0  1  1  1  0 |
+    Pq|  0  0  1  1  1  0 |
+    S |  1  1  1  1  1  0 |
+    T |  0  0  0  0  0  1 |
+s </pre>
+
+    <h3>4. Composição Metrô-Ônibus ($M_{composta}$)</h3>
+    <p>Resultado da operação $M_{metrô} \circ M_{ônibus}$, para analisar a integração com uma baldeação.</p>
+
+    <h4>Matriz de Ônibus ($M_{ônibus}$)</h4>
+    <pre class="matrix">
+         A  C Pç Pq S  T
+       ------------------
+    A |  0  1  0  0  0  1 |
+    C |  1  0  0  1  0  0 |
+    Pç|  0  0  0  1  0  0 |
+    Pq|  0  1  1  0  0  1 |
+    S |  0  0  0  0  0  1 |
+    T |  1  0  0  1  1  0 |
+s </pre>
+
+    <h4>Resultado Final ($M_{composta}$)</h4>
+    <pre class="matrix">
+         A  C Pç Pq S  T
+       ------------------
+    A |  0  1  0  1  0  1 |
+    C |  1  1  0  1  0  1 |
+    Pç|  0  1  1  1  0  1 |
+    Pq|  0  1  1  1  0  1 |
+    S |  1  1  0  1  0  1 |
+    T |  1  0  0  1  1  0 |
+s </pre>
+    <p><strong>Conclusão da Integração:</strong> A composição é robusta, permitindo que o passageiro utilize o metrô no Terminal (isolado) e, com uma baldeação para o ônibus, alcance a Avenida (M(6, 1) = 1).</p>
+  </aside>
+</main>
+
+<footer>
+  <p>Desenvolvido por <strong>Vinícius Gabriel de Castro Barbosa</strong> • Ciência da Computação • UNIFOR</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

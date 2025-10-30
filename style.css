@@ -1,0 +1,112 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Segoe UI", sans-serif;
+	color: #fff;
+	background: linear-gradient(135deg, #06111f 40%, #092a3a);
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+header {
+	text-align: center;
+	padding: 15px;
+	background-color: #0d2233;
+	border-bottom: 2px solid #00ffff;
+}
+
+main {
+	display: flex;
+	flex: 1;
+	overflow: hidden;
+}
+
+#simulacao {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+}
+
+canvas {
+	background: #081422;
+	border: 2px solid #00ffff;
+	border-radius: 12px;
+	margin-bottom: 10px;
+}
+
+.controles {
+	margin-bottom: 15px;
+}
+
+button {
+	background-color: #00ffff;
+	border: none;
+	color: #000;
+	font-weight: bold;
+	padding: 8px 15px;
+	margin: 5px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+button:hover {
+	background-color: #03d9c6;
+}
+
+.painel-direcoes {
+	background: #0a1f30;
+	border: 1px solid #00ffff;
+	border-radius: 10px;
+	width: 90%;
+	text-align: center;
+	padding: 10px;
+}
+
+#controle-direcoes {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#controle-direcoes th,
+#controle-direcoes td {
+	border: 1px solid #00ffff;
+	padding: 6px;
+}
+
+#info {
+	flex: 1;
+	background: #0b1c29;
+	border-left: 2px solid #00ffff;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+#info h2 {
+	color: #00ffff;
+}
+
+/* Novo estilo para a exibição das matrizes */
+.matrix {
+	white-space: pre;
+	font-family: monospace;
+	background-color: #06111f;
+	border: 1px solid #00ffff;
+	padding: 10px;
+	border-radius: 5px;
+	overflow-x: auto;
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 10px 0;
+}
+
+footer {
+	text-align: center;
+	font-size: 12px;
+	padding: 10px;
+	background: #06111f;
+	border-top: 2px solid #00ffff;
+}
